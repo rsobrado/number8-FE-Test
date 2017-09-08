@@ -43,3 +43,7 @@ function whatMonth(month){
 				 break;
 	}
 }
+
+function Calendar(){
+	console.log('submit');
+}
