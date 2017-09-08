@@ -1,5 +1,8 @@
 
-//generic date functions
+//-----------------------------------------------
+//--------- generic date functions --------------
+//-----------------------------------------------
+
 function getMonth(date){
 	var m = parseInt(date.slice(0,2));
 	return m;
@@ -44,14 +47,56 @@ function whatMonth(month){
 	}
 }
 
+//-----------------------------------------------
+//--------- Render/Display Month functions ------
+//-----------------------------------------------
+function emptyDays(daysToDisplay){
+	var blanks = 0;
+	if(daysToDisplay>1){
+		for (var i = 1; i < daysToDisplay; i++) {
+			document.write('<td class="blank" '+i+'></td>');
+			if(i%7==0){
+				document.write("<tr />");
+				document.write("<tr>");
+			}
+			blanks+=1;
+		}
+	}
+	return blanks;
+}
+
+function fillBlanks(totalDays){
+	var days = Math.abs(totalDays+1);
+	var blanks = 7-(days%7);
+
+	for (var i = 1; i <= days; i++) {
+		document.write('<td class="blank" ></td>');
+		if(i%7==0){
+			document.write("<tr/>");
+		}
+	}
+}
+
+function generateMonths(day,month, year, daysToDisplay,pos){
+	var totalDaysMonth = whatMonth(month).days;
+	var monthLiteral = whatMonth(month).name;
+	var totalMonths = (daysToDisplay*12)/365;
+	var pos = day;
+
+	document.getElementById('renderArea').innerHTML = daysToDisplay+' Days Example';
+
+}
+
+
+
 function Calendar(){
 	var date = document.getElementById('date').value;
-	var days = document.getElementById('days').value;
+	var daysToDisplay = document.getElementById('days').value;
 
 	var day = getDay(date);
 	var month = getMonth(date);
 	var year = getYear(date);
+	// document.getElementById('renderArea').innerHTML = month+' '+day+' '+year;
 
-	console.log(month+' '+day+' '+year);
-	console.log(days);
+	generateMonths(day,month, year, daysToDisplay);
 }
