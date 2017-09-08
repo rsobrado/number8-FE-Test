@@ -54,10 +54,10 @@ function emptyDays(daysToDisplay){
 	var blanks = 0;
 	if(daysToDisplay>1){
 		for (var i = 1; i < daysToDisplay; i++) {
-			document.write('<td class="blank" '+i+'></td>');
+			document.getElementById('renderArea').innerHTML += '<td class="blank" '+i+'></td>';
 			if(i%7==0){
-				document.write("<tr />");
-				document.write("<tr>");
+				document.getElementById('renderArea').innerHTML += "<tr />";
+				document.getElementById('renderArea').innerHTML += "<tr>";
 			}
 			blanks+=1;
 		}
@@ -70,11 +70,24 @@ function fillBlanks(totalDays){
 	var blanks = 7-(days%7);
 
 	for (var i = 1; i <= days; i++) {
-		document.write('<td class="blank" ></td>');
+		document.getElementById('renderArea').innerHTML += '<td class="blank" ></td>';
 		if(i%7==0){
-			document.write("<tr/>");
+			document.getElementById('renderArea').innerHTML += "<tr/>";
 		}
 	}
+}
+
+
+function createMonthGrid(day,totalDaysMonth,daysToDisplay,year,monthLiteral,pos){
+	var pos = pos;
+	var table = '</tbody></table>'
+	// document.getElementById('renderArea').innerHTML += '<table class="calendar"><thead><td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td></thead>';
+
+	document.getElementById('renderArea').innerHTML += '<table class="calendar"><thead><td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td></thead><tbody><tr class="header"> <td colspan=7>'+monthLiteral.concat(' '+ year +'</td> </tr>');
+	pos = generateDays(day,totalDaysMonth,daysToDisplay,pos);
+	document.getElementById('renderArea').innerHTML += table;
+
+	return pos;	
 }
 
 function generateMonths(day,month, year, daysToDisplay,pos){
@@ -85,9 +98,55 @@ function generateMonths(day,month, year, daysToDisplay,pos){
 
 	document.getElementById('renderArea').innerHTML = daysToDisplay+' Days Example';
 
+	for (var i = totalMonths; i >= 0; i--) {
+
+		pos = createMonthGrid(day,totalDaysMonth,daysToDisplay,year,monthLiteral,pos);
+		
+		month+=1;
+		day = 1;
+		
+		if(month>12){
+			month = 1;
+			year += 1;
+		}
+
+		totalDaysMonth = whatMonth(month).days+(pos-1);
+		monthLiteral = whatMonth(month).name;
+	}
+
 }
 
 
+function generateDays(initialDay,totalDaysMonth,days,pos){
+	var totalDays = days;
+	var blanks = emptyDays(pos);
+	var finalDay;
+	console.log(days);
+	console.log(pos);
+	
+	for (var i = pos; i <= totalDaysMonth; i++) {
+		if(totalDays>0){
+			if ((i%7)==0 | (i%7)==1){
+				document.getElementById('renderArea').innerHTML += '<td class="weekend" >'+initialDay+'</td>';
+			}
+			else{
+				document.getElementById('renderArea').innerHTML += '<td class="day" >'+initialDay+'</td>';
+			}
+			if(i%7==0){
+				document.getElementById('renderArea').innerHTML += "<tr />";
+				document.getElementById('renderArea').innerHTML += "<tr>";
+			}
+		}
+		totalDays-=1;
+		finalDay = i%7;
+		initialDay+=1;
+	}
+	if(finalDay>0){
+		fillBlanks(6-finalDay);
+	}
+
+	return finalDay+1;
+}
 
 function Calendar(){
 	var date = document.getElementById('date').value;
