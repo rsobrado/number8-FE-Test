@@ -1,13 +1,13 @@
 
 //generic date functions
-function getDay(date){
-	var d = parseInt(date.slice(0,2));
-	return d;
+function getMonth(date){
+	var m = parseInt(date.slice(0,2));
+	return m;
 }
 
-function getMonth(date){
-	var m = parseInt(date.slice(3,5));
-	return m;
+function getDay(date){
+	var d = parseInt(date.slice(3,5));
+	return d;
 }
 
 function getYear(date){
@@ -45,5 +45,13 @@ function whatMonth(month){
 }
 
 function Calendar(){
-	console.log('submit');
+	var date = document.getElementById('date').value;
+	var days = document.getElementById('days').value;
+
+	var day = getDay(date);
+	var month = getMonth(date);
+	var year = getYear(date);
+
+	console.log(month+' '+day+' '+year);
+	console.log(days);
 }
