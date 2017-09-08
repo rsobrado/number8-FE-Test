@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Number8 - Calendar FE Test</title>
+		<link rel="stylesheet" href="css/styles.css">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+						<form >
+							<div class="col-md-6 ">
+								<div class="row">
+									<div class="col-md-6 form-group">
+									<label for="date">Start Date:</label>
+										<input type="text" class="form-control" id="date" placeholder="mm/dd/yyyy">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label for="days">Number of days:</label>
+										<input type="text" class="form-control" id="days" placeholder="10">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label for="code">Country Code:</label>
+										<input type="text" class="form-control" id="code" placeholder="Country code">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 form-group">
+					  				<button type="button" class="btn btn-primary submit" onclick="Calendar()"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Calculate Days</button>
+				  				</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<section id="renderArea"></section>
+							</div>
+						</form> 
+			</div>
+
+		<div class="row">
+			<a href="index-static.html">*static js version</a>
+		</div>
+		</div>
+
+		<script src="js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,28 @@
+table {
+	margin-top: 20px;
+}
+
+
+table .header {
+    text-align: center;
+    background: honeydew;
+}
+
+table td{
+	min-width: 20px;
+	height: 20px;
+}
+td{
+	text-align: center;
+	padding: 3px;
+}
+.blank{
+	background: lightgray;
+}
+
+.weekend{
+	background: yellow;
+}
+.day{
+	background: lightgreen;
+}
